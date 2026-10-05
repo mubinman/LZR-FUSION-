@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>𝙇𝙕𝙍 𝙁𝙐𝙎𝙄𝙊𝙉 !!</title>
+    <style> 
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&family=Rajdhani:wght@600;700&display=swap'); 
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Orbitron', sans-serif; background: #000; } 
+        #bg-frame { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; z-index: 0; } 
+        .mode-selector { display: flex; justify-content: space-between; width: 100%; margin-bottom: 10px; gap: 6px; z-index: 10; } 
+        .mode-btn { background: rgba(10, 10, 15, 0.85); border: 1.5px solid rgba(255, 255, 255, 0.1); color: #666677; padding: 8px 0; font-size: 10px; font-weight: 900; border-radius: 10px; cursor: pointer; font-family: 'Orbitron'; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); width: 48%; text-align: center; letter-spacing: 1px; z-index: 20; box-shadow: inset 0 0 8px rgba(0,0,0,0.8); } 
+        .mode-btn.active { border-color: #00ffcc; color: #fff; box-shadow: 0 0 15px rgba(0, 255, 204, 0.6), inset 0 0 10px rgba(0, 255, 204, 0.3); text-shadow: 0 0 6px #00ffcc; background: rgba(0, 20, 20, 0.8); } 
+        #widget-container { position: absolute; top: 110px; left: 20px; width: 200px; height: 350px; z-index: 9999; touch-action: none; display: flex; flex-direction: column; padding: 3px; border-radius: 22px; background: linear-gradient(120deg, #ff0055, #00ffcc, #9900ff, #ffcc00, #00ff55, #ff0055); background-size: 300% 300%; animation: mega_rgb 5s ease infinite; box-shadow: 0 0 25px rgba(0, 255, 204, 0.3), 0 12px 45px rgba(0,0,0,0.95); } 
+        @keyframes mega_rgb { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } } 
+        .inner-content { width: 100%; height: 100%; background: radial-gradient(circle at 50% 0%, rgba(0, 255, 204, 0.1) 0%, rgba(5, 5, 10, 0.85) 80%); border-radius: 19px; display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 12px; box-sizing: border-box; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); } 
+        #panel-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; pointer-events: none; opacity: 0.85; } 
+        #login-page { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; background: rgba(3, 3, 5, 0.5); backdrop-filter: blur(4px); border-radius: 19px; top: 0; left: 0; padding: 15px; box-sizing: border-box; } 
+        #login-page input { width: 80%; padding: 6px 10px; margin-bottom: 12px; border-radius: 8px; border: 1.5px solid #ff0055; background: rgba(10, 2, 5, 0.95); color: #fff; text-align: center; font-family: 'Orbitron'; outline: none; font-size: 10px; letter-spacing: 2px; box-shadow: 0 0 10px rgba(255, 0, 85, 0.3); transition: all 0.3s ease; z-index: 102; } 
+        #login-page input:focus { border-color: #00ffcc; box-shadow: 0 0 15px rgba(0, 255, 204, 0.5); } 
+        .login-btn { background: linear-gradient(90deg, #ff0055, #9900ff); border: none; padding: 8px 20px; border-radius: 8px; font-weight: 900; font-family: 'Orbitron'; cursor: pointer; color: #fff; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(255, 0, 85, 0.4); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 102; width: 90%; margin-bottom: 8px; } 
+        .login-btn:hover { transform: translateY(-1px) scale(1.03); box-shadow: 0 8px 20px rgba(0, 255, 204, 0.7); } 
+        .telegram-btn { background: linear-gradient(90deg, #0088cc, #0055ff); border: none; padding: 8px 20px; border-radius: 8px; font-weight: 900; font-family: 'Orbitron'; cursor: pointer; color: #fff; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 102; width: 90%; }
+        .telegram-btn:hover { transform: translateY(-1px) scale(1.03); box-shadow: 0 8px 20px rgba(0, 136, 204, 0.7); }
+        #hack-widget { width: 100%; height: 100%; display: none; flex-direction: column; align-items: center; justify-content: space-around; position: relative; z-index: 5; } 
+        .user-title { color: #FFD700; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-align: center; font-family: 'Rajdhani', sans-serif; text-shadow: 0 0 8px #FFD700, 0 0 20px #ff5500; margin-top: 1px; } 
+        .period-box { font-size: 10px; color: #bbbbc5; font-family: 'Orbitron'; background: rgba(5, 5, 10, 0.85); padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.08); letter-spacing: 0.5px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); } 
+        .period-box span { color: #00ffcc; font-weight: bold; text-shadow: 0 0 6px rgba(0,255,204,0.6); } 
+        .signal-text { font-size: 30px; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; text-align: center; animation: floating 1.8s ease-in-out infinite; text-shadow: 0 0 20px currentColor, 0 0 30px currentColor; } 
+        .number-box { font-size: 45px; font-weight: 900; color: #fff; text-shadow: 0 0 15px #fff, 0 0 25px #ff0055; font-family: 'Rajdhani'; margin: -10px 0; } 
+        @keyframes floating { 0%, 100% { transform: translateY(0px) scale(1); } 50% { transform: translateY(-4px) scale(1.02); } } 
+        .timer-circle { width: 48px; height: 48px; border: 2.5px solid #ff0055; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 900; font-size: 16px; background: rgba(2, 2, 5, 0.9); box-shadow: 0 0 15px #ff0055, inset 0 0 10px rgba(255, 0, 85, 0.5); font-family: 'Rajdhani'; transition: all 0.4s ease; } 
+        #error-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0d0005; display: none; z-index: 150; color: #ff0055; font-size: 10px; font-family: monospace; padding: 20px; box-sizing: border-box; text-align: center; line-height: 1.6;} 
+        .crash-effect { animation: shake 0.12s infinite !important; } 
+        @keyframes shake { 0% { transform: translate(1px, 1px); } 50% { transform: translate(-1px, -1px); } 100% { transform: translate(1px, -1px); } } 
+    </style>
+</head>
+<body>
+    <iframe id="bg-frame" src="https://jaiclub26.site/#/register?invitationCode=420033684307"></iframe>
+    <div id="widget-container">
+        <div class="mode-selector">
+            <div id="btn-30s" class="mode-btn active" onclick="changeMode('30s')">30 SEC</div>
+            <div id="btn-1m" class="mode-btn" onclick="changeMode('1m')">1 MIN</div>
+        </div>
+        <div class="inner-content">
+            <video id="panel-video" autoplay loop muted playsinline preload="auto">
+                <source src="https://files.catbox.moe/2fkmx9.mp4" type="video/mp4">
+            </video>
+            
+            <div id="login-page">
+                <p id="status-text" style="color:#00ffcc; font-size:12px; margin-bottom:12px; letter-spacing:1px; font-weight:bold; text-shadow: 0 0 10px #00ffcc; text-align: center;"> 
+                    𝙇𝙕𝙍 𝙁𝙐𝙎𝙄𝙊𝙉 !!<br>
+                    <span style="font-size:8px; color:#ccc; letter-spacing: 1.5px;">PREMIUM LZR MOD </span>
+                </p>
+                <input type="password" id="pass" placeholder="ACCESS KEY" />
+                <button class="login-btn" onclick="checkLogin()">Initialize</button>
+                <button class="telegram-btn" onclick="window.open('https://t.me/+mPrWRrKm8K0xODVl')">JOIN TELEGRAM</button>
+            </div>
+            
+            <div id="hack-widget">
+                <div class="user-title">𝙇𝙕𝙍 𝙁𝙐𝙎𝙄𝙊𝙉 !!</div>
+                <div class="period-box">ID: <span id="period-display">Loading...</span></div>
+                <div id="signal" class="signal-text">WAIT</div>
+                <div class="number-box" id="num-display">-</div>
+                <div class="timer-circle" id="timer">--</div>
+            </div>
+            
+            <div id="error-overlay">
+                <h2 style="text-shadow: 0 0 10px #ff0055;">[!] FATAL_ERROR</h2>
+                <p>SYSTEM ACCESS TERMINATED BY SERVER.</p>
+                <p>RE-DIRECTING TO TG COMMUNITY...</p>
+            </div>
+        </div>
+    </div>
+
+<script> 
+const container = document.getElementById("widget-container"); 
+const loginPage = document.getElementById("login-page"); 
+const hackWidget = document.getElementById("hack-widget"); 
+const statusText = document.getElementById("status-text"); 
+const errorOverlay = document.getElementById("error-overlay"); 
+const periodDisplay = document.getElementById("period-display"); 
+const sig = document.getElementById("signal"); 
+const numDisp = document.getElementById("num-display"); 
+const timerCircle = document.getElementById("timer"); 
+let currentMode = '30s'; 
+
+const PATTERN_SEED = [ 
+    {s: "BIG", n: 7}, {s: "SMALL", n: 2}, {s: "SMALL", n: 4}, {s: "BIG", n: 9}, 
+    {s: "BIG", n: 6}, {s: "SMALL", n: 0}, {s: "BIG", n: 8}, {s: "SMALL", n: 3}, 
+    {s: "SMALL", n: 1}, {s: "BIG", n: 5}, {s: "BIG", n: 7}, {s: "SMALL", n: 4} 
+]; 
+
+function generateHGZYPeriod() { 
+    const now = new Date(); 
+    const baseTimeUTC = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0); 
+    const diffSeconds = Math.floor((Date.now() - baseTimeUTC) / 1000); 
+    const interval = currentMode === '30s' ? 30 : 60; 
+    const periodIndex = Math.floor(diffSeconds / interval) + 1; 
+    const yyyy = now.getUTCFullYear(); 
+    const mm = String(now.getUTCMonth() + 1).padStart(2, "0"); 
+    const dd = String(now.getUTCDate()).padStart(2, "0"); 
+    const datePart = `${yyyy}${mm}${dd}`; 
+    const periodId = datePart + String(periodIndex).padStart(5, "0"); 
+    const secondsLeft = interval - (diffSeconds % interval); 
+    return { id: periodId, index: periodIndex, timeLeft: secondsLeft }; 
+} 
+
+function changeMode(mode) { 
+    if (currentMode === mode) return; 
+    currentMode = mode; 
+    document.getElementById('btn-30s').classList.remove('active'); 
+    document.getElementById('btn-1m').classList.remove('active'); 
+    if(mode === '30s') { 
+        document.getElementById('btn-30s').classList.add('active'); 
+    } else { 
+        document.getElementById('btn-1m').classList.add('active'); 
+    } 
+    update(true); 
+} 
+
+function checkLogin() { 
+    // Key is changed to ZENOX
+    if (document.getElementById("pass").value === "ZENOX") { 
+        loginPage.style.display = "none"; 
+        hackWidget.style.display = "flex"; 
+        update(); 
+        const vid = document.getElementById("panel-video"); 
+        if(vid) { 
+            vid.muted = true; 
+            vid.play().catch(e => console.log("Video setup secured.")); 
+        } 
+    } else { 
+        statusText.innerText = "TERMINATED!"; 
+        statusText.style.color = "#ff0055"; 
+        statusText.style.textShadow = "0 0 15px #ff0055"; 
+        container.classList.add("crash-effect"); 
+        setTimeout(() => { 
+            errorOverlay.style.display = "block"; 
+            setTimeout(() => { 
+                window.location.href = "https://t.me/MR_BABA_HACRR"; 
+            }, 1800); 
+        }, 1000); 
+    } 
+} 
+
+let isDragging = false; 
+let offset = { x: 0, y: 0 }; 
+const start = (e) => { 
+    if(e.target.classList.contains('mode-btn') || e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return; 
+    isDragging = true; 
+    const c = e.type.includes('touch') ? e.touches[0] : e; 
+    offset.x = c.clientX - container.offsetLeft; 
+    offset.y = c.clientY - container.offsetTop; 
+    container.style.transition = "none"; 
+}; 
+const move = (e) => { 
+    if (!isDragging) return; 
+    e.preventDefault(); 
+    const c = e.type.includes('touch') ? e.touches[0] : e; 
+    let x = c.clientX - offset.x; 
+    let y = c.clientY - offset.y; 
+    x = Math.max(0, Math.min(x, window.innerWidth - container.offsetWidth)); 
+    y = Math.max(0, Math.min(y, window.innerHeight - container.offsetHeight)); 
+    container.style.left = x + "px"; 
+    container.style.top = y + "px"; 
+}; 
+const stop = () => { 
+    isDragging = false; 
+    container.style.transition = "all 0.3s ease-out, background-position 5s ease infinite"; 
+}; 
+container.addEventListener("mousedown", start); 
+window.addEventListener("mousemove", move); 
+window.addEventListener("mouseup", stop); 
+container.addEventListener("touchstart", start, {passive: false}); 
+window.addEventListener("touchmove", move, {passive: false}); 
+window.addEventListener("touchend", stop); 
+
+function update(modeChanged = false) { 
+    const p = generateHGZYPeriod(); 
+    if (periodDisplay.innerText !== p.id || modeChanged) { 
+        periodDisplay.innerText = p.id; 
+    } 
+    if (!sig || !numDisp || !timerCircle) return; 
+    timerCircle.innerText = p.timeLeft; 
+    const modeOffset = currentMode === '30s' ? 0 : 5; 
+    const patternIndex = (p.index + modeOffset) % PATTERN_SEED.length; 
+    const prediction = PATTERN_SEED[patternIndex]; 
+    
+    if (p.timeLeft <= 5) { 
+        sig.innerText = "SYNCING"; 
+        sig.style.color = "#FFD700"; 
+        sig.style.textShadow = "0 0 15px #FFD700, 0 0 25px #ff5500"; 
+        numDisp.innerText = "×"; 
+        numDisp.style.color = "#FFD700"; 
+        numDisp.style.textShadow = "0 0 15px #FFD700"; 
+        timerCircle.style.borderColor = "#FFD700"; 
+        timerCircle.style.boxShadow = "0 0 15px #FFD700, inset 0 0 8px rgba(255, 215, 0, 0.5)"; 
+    } else { 
+        sig.innerText = prediction.s; 
+        numDisp.innerText = prediction.n; 
+        if (prediction.s === "BIG") { 
+            sig.style.color = "#00ffcc"; 
+            sig.style.textShadow = "0 0 20px #00ffcc, 0 0 30px #00ff55"; 
+            numDisp.style.color = "#fff"; 
+            numDisp.style.textShadow = "0 0 20px #fff, 0 0 30px #00ffcc"; 
+            timerCircle.style.borderColor = "#00ffcc"; 
+            timerCircle.style.boxShadow = "0 0 18px #00ffcc, inset 0 0 8px rgba(0,255,204,0.5)"; 
+        } else { 
+            sig.style.color = "#ff0055"; 
+            sig.style.textShadow = "0 0 20px #ff0055, 0 0 30px #ff0000"; 
+            numDisp.style.color = "#fff"; 
+            numDisp.style.textShadow = "0 0 20px #fff, 0 0 30px #ff0055"; 
+            timerCircle.style.borderColor = "#ff0055"; 
+            timerCircle.style.boxShadow = "0 0 18px #ff0055, inset 0 0 8px rgba(255,0,85,0.5)"; 
+        } 
+    } 
+} 
+setInterval(() => update(false), 1000); 
+update(true); 
+</script>
+</body>
+</html>
